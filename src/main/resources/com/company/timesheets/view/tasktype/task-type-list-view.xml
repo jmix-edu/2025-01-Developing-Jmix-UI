@@ -17,7 +17,7 @@
         <dataLoadCoordinator auto="true"/>
         <urlQueryParameters>
             <pagination component="pagination"/>
-            <propertyFilter component="nameFilter"/>
+            <genericFilter component="genericFilter"/>
         </urlQueryParameters>
     </facets>
     <actions>
@@ -25,20 +25,10 @@
         <action id="discardAction" type="lookup_discard"/>
     </actions>
     <layout>
-
-        <propertyFilter id="nameFilter"
-                        dataLoader="taskTypesDl" property="name"
-                        operation="CONTAINS"
-                        labelVisible="false"
-                        width="100%" maxWidth="30em">
-            <textField id="nameFilterField"
-                       placeholder="msg://nameFilter.placeholder"
-            clearButtonVisible="true">
-            <prefix>
-                <icon icon="SEARCH"/>
-            </prefix>
-        </textField>
-    </propertyFilter>
+        <genericFilter id="genericFilter"
+                       dataLoader="taskTypesDl">
+            <properties include=".*"/>
+        </genericFilter>
 
         <hbox id="buttonsPanel" classNames="buttons-panel">
             <button id="createBtn" action="taskTypesDataGrid.create"/>
@@ -57,7 +47,7 @@
             </actions>
             <columns resizable="true">
                 <column property="name"/>
-                <column property="description" flexGrow="2"/>
+                <column property="description"/>
             </columns>
         </dataGrid>
         <hbox id="lookupActions" visible="false">
