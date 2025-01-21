@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <view xmlns="http://jmix.io/schema/flowui/view"
-      title="msg://clientListView.title">
-    <!--      focusComponent="nameFilterField">-->
-    <data readOnly="true">
+      xmlns:c="http://jmix.io/schema/flowui/jpql-condition"
+      title="msg://clientLookupView.title"
+      focusComponent="clientsDataGrid">
+    <data>
         <collection id="clientsDc"
                     class="com.company.timesheets.entity.Client">
-            <fetchPlan extends="_base"/>
+            <fetchPlan extends="_instance_name"/>
             <loader id="clientsDl" readOnly="true">
                 <query>
                     <![CDATA[select e from ts_Client e]]>
@@ -13,26 +14,30 @@
             </loader>
         </collection>
     </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+    </facets>
     <actions>
         <action id="selectAction" type="lookup_select"/>
         <action id="discardAction" type="lookup_discard"/>
     </actions>
-    <facets>
-        <dataLoadCoordinator auto="true"/>
-        <urlQueryParameters>
-            <pagination component="pagination"/>
-            <genericFilter component="genericFilter"/>
-        </urlQueryParameters>
-    </facets>
     <layout>
-        <genericFilter id="genericFilter"
-                       dataLoader="clientsDl">
-            <properties include=".*"/>
-        </genericFilter>
         <hbox id="buttonsPanel" classNames="buttons-panel">
-            <button id="createBtn" action="clientsDataGrid.create"/>
-            <button id="editBtn" action="clientsDataGrid.edit"/>
-            <button id="removeBtn" action="clientsDataGrid.remove"/>
+            <propertyFilter id="nameFilter"
+                            property="name"
+                            operation="CONTAINS"
+                            dataLoader="clientsDl"
+                            labelVisible="false"
+                            width="100%"
+                            maxWidth="30em">
+                <textField id="nameFilterField"
+                           placeholder="Find a client..."
+                           clearButtonVisible="true">
+                    <prefix>
+                        <icon icon="SEARCH"/>
+                    </prefix>
+                </textField>
+            </propertyFilter>
             <simplePagination id="pagination" dataLoader="clientsDl"/>
         </hbox>
         <dataGrid id="clientsDataGrid"
@@ -40,17 +45,14 @@
                   minHeight="20em"
                   dataContainer="clientsDc">
             <actions>
-                <action id="create" type="list_create"/>
-                <action id="edit" type="list_edit"/>
-                <action id="remove" type="list_remove"/>
             </actions>
             <columns>
                 <column property="name"/>
             </columns>
         </dataGrid>
         <hbox id="lookupActions" visible="false">
-            <button id="selectBtn" action="selectAction"/>
-            <button id="discardBtn" action="discardAction"/>
+            <button id="selectButton" action="selectAction"/>
+            <button id="discardButton" action="discardAction"/>
         </hbox>
     </layout>
 </view>

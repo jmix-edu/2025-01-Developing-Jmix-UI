@@ -3,10 +3,7 @@ package com.company.timesheets.view.client;
 import com.company.timesheets.entity.Client;
 import com.company.timesheets.view.main.MainView;
 import com.vaadin.flow.router.Route;
-import io.jmix.flowui.view.EditedEntityContainer;
-import io.jmix.flowui.view.StandardDetailView;
-import io.jmix.flowui.view.ViewController;
-import io.jmix.flowui.view.ViewDescriptor;
+import io.jmix.flowui.view.*;
 
 @Route(value = "clients/:id", layout = MainView.class)
 @ViewController("ts_Client.detail")

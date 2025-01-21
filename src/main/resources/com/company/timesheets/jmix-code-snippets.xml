@@ -1,0 +1,32 @@
+<jmixCodeSnippets xmlns="http://jmix.io/schema/core/code-snippets">
+    <category name="Project snippets">
+
+        <codeSnippet name="Get user active tasks" contextTypes="service,controller">
+            <inject variable="taskSupport" classQualifiedName="com.company.timesheets.app.TaskSupport"/>
+            <text language="java">
+                java.util.List&lt;com.company.timesheets.entity.Task&gt; tasks = taskSupport.getUserActiveTasks(user);
+            </text>
+            <description>
+                Load user's active Tasks
+            </description>
+        </codeSnippet>
+
+        <codeSnippet name="Show tray notification" contextTypes="controller">
+            <inject variable="notifications" classQualifiedName="io.jmix.flowui.Notifications">
+            </inject>
+            <text language="java">
+                notifications.create("${caption}", "${description}")
+                .withType(Notifications.Type.DEFAULT)
+                .withPosition(Notification.Position.BOTTOM_END)
+                .show();
+            </text>
+            <description>
+                Show default tray notification
+            </description>
+            <stringInputParameter code="caption" text="Insert caption"/>
+            <stringInputParameter code="description" text="Insert description"/>
+        </codeSnippet>
+
+    </category>
+
+</jmixCodeSnippets>
