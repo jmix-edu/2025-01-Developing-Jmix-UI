@@ -10,19 +10,19 @@
             </fetchPlan>
             <loader/>
         </instance>
-        <collection id="tasksDc" class="com.company.timesheets.entity.Task">
-            <loader id="tasksDl" readOnly="true">
-                <query>
-                    <![CDATA[select e from ts_Task e
-                             where e.project.status = @enum(com.company.timesheets.entity.ProjectStatus.OPEN)
-                                    and e.status = @enum(com.company.timesheets.entity.TaskStatus.ACTIVE)
-                                    and (select pp from ts_ProjectParticipant pp where pp.user.username = :username)
-                                    MEMBER OF e.project.participants
-                             order by e.project.name asc, e.name asc]]>
-                </query>
-            </loader>
-            <fetchPlan extends="_base"/>
-        </collection>
+<!--        <collection id="tasksDc" class="com.company.timesheets.entity.Task">-->
+<!--            <loader id="tasksDl" readOnly="true">-->
+<!--                <query>-->
+<!--                    <![CDATA[select e from ts_Task e-->
+<!--                             where e.project.status = @enum(com.company.timesheets.entity.ProjectStatus.OPEN)-->
+<!--                                    and e.status = @enum(com.company.timesheets.entity.TaskStatus.ACTIVE)-->
+<!--                                    and (select pp from ts_ProjectParticipant pp where pp.user.username = :username)-->
+<!--                                    MEMBER OF e.project.participants-->
+<!--                             order by e.project.name asc, e.name asc]]>-->
+<!--                </query>-->
+<!--            </loader>-->
+<!--            <fetchPlan extends="_base"/>-->
+<!--        </collection>-->
     </data>
     <facets>
         <dataLoadCoordinator auto="true"/>
@@ -39,7 +39,7 @@
                     <icon icon="CALENDAR"/>
                 </prefix>
             </datePicker>
-            <entityPicker id="userField" property="user" readOnly="true">
+            <entityComboBox id="userField" property="user" readOnly="true">
                 <actions>
                     <action id="assignSelf" icon="USER_CHECK" text="msg://actions.assignSelf.text"/>
                     <action id="entityLookup" type="entity_lookup"/>
@@ -48,8 +48,20 @@
                 <prefix>
                     <icon icon="USER"/>
                 </prefix>
-            </entityPicker>
-            <entityComboBox id="taskField" property="task" itemsContainer="tasksDc">
+                <itemsQuery class="com.company.timesheets.entity.User"
+                            searchStringFormat="(?i)%${inputString}%"
+                            escapeValueForLike="true">
+                    <fetchPlan extends="_base"/>
+                    <query>
+                        select e from ts_User e
+                        where e.username like :searchString
+                        or e.firstName like :searchString
+                        or e.lastName like :searchString
+                        escape '\' order by e.username asc
+                    </query>
+                </itemsQuery>
+            </entityComboBox>
+            <entityComboBox id="taskField" property="task">
                 <actions>
                     <action id="entityLookup" type="entity_lookup"/>
                     <action id="entityClear" type="entity_clear"/>

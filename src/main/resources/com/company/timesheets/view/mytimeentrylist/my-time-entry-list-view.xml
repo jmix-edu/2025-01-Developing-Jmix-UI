@@ -13,10 +13,14 @@
     </data>
     <facets>
         <dataLoadCoordinator auto="true"/>
+        <urlQueryParameters>
+            <genericFilter component="genericFilter"/>
+        </urlQueryParameters>
+        <settings auto="true"/>
     </facets>
     <layout>
 
-        <genericFilter dataLoader="timeEntriesDl">
+        <genericFilter id="genericFilter" dataLoader="timeEntriesDl">
             <properties include=".*"/>
         </genericFilter>
         <hbox id="buttonsPanel" classNames="buttons-panel">

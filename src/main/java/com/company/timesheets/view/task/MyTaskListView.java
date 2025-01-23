@@ -5,6 +5,7 @@ import com.company.timesheets.entity.Task;
 import com.company.timesheets.entity.TimeEntry;
 import com.company.timesheets.entity.User;
 import com.company.timesheets.view.main.MainView;
+import com.company.timesheets.view.timeentry.TimeEntryDetailView;
 import com.vaadin.flow.router.Route;
 import io.jmix.core.AccessManager;
 import io.jmix.core.DataManager;
@@ -49,9 +50,13 @@ public class MyTaskListView extends StandardListView<Task> {
         timeEntry.setUser((User) currentUserSubstitution.getEffectiveUser());
         timeEntry.setTask(selectedTask);
 
-        dialogWindows.detail(this, TimeEntry.class)
+        DialogWindow<TimeEntryDetailView> dialogWindow = dialogWindows.detail(this, TimeEntry.class)
+                .withViewClass(TimeEntryDetailView.class)
                 .newEntity(timeEntry)
-                .open();
+                .build();
+
+        dialogWindow.getView().setOwnTimeEntry(true);
+        dialogWindow.open();
     }
 
     @Install(to = "tasksDataGrid.createTimeEntry", subject = "enabledRule")
