@@ -38,10 +38,10 @@
             </hbox>
         </vbox>
         <textField id="nameField"
-                       dataContainer="clientDc"
-                       property="name"
-                       label="msg://com.company.timesheets.entity/Client.name"
-                       width="100%" maxWidth="30em">
+                   dataContainer="clientDc"
+                   property="name"
+                   label="msg://com.company.timesheets.entity/Client.name"
+                   width="100%" maxWidth="30em">
             <prefix>
                 <icon icon="USER_CARD"/>
             </prefix>
@@ -51,34 +51,45 @@
 
         <details id="contactInformationDetails"
                  summaryText="msg://com.company.timesheets.entity/Client.contactInformation"
-                 width="100%" opened="true">
-            <formLayout id="contactInformationForm" dataContainer="contactInformationDc">
-                <responsiveSteps>
-                    <responsiveStep minWidth="0" columns="1"/>
-                    <responsiveStep minWidth="60em" columns="3"/>
-                </responsiveSteps>
-                <emailField id="emailField" property="email">
-                    <prefix>
-                        <icon icon="ENVELOPE"/>
-                    </prefix>
-                </emailField>
-                <textField id="phoneField" property="phone">
-                    <prefix>
-                        <icon icon="PHONE"/>
-                    </prefix>
-                </textField>
-                <textField id="urlField" dataContainer="contactInformationDc" property="url">
-                    <prefix>
-                        <icon icon="LINK"/>
-                    </prefix>
-                </textField>
-                <textArea id="addressField" dataContainer="contactInformationDc" property="address"
-                          height="9.5em" colspan="3">
-                    <prefix>
-                        <icon icon="MAP_MARKER"/>
-                    </prefix>
-                </textArea>
-            </formLayout>
+                 width="100%" opened="true"
+                 themeNames="non-collapsible summary-filled bordered">
+            <fragment class="com.company.timesheets.view.contactinformationfragment.ContactInformationFragment"/>
+
+
+
+<!--            <fragment class="com.company.timesheets.view.contactinformationfragment.ContactInformationFragment">-->
+<!--                <properties>-->
+<!--                    <property name="contactInformationValues" value="contactInformationDc" type="CONTAINER_REF"/>-->
+<!--                </properties>-->
+<!--            </fragment>-->
+
+<!--            <formLayout id="contactInformationForm" dataContainer="contactInformationDc">-->
+<!--                <responsiveSteps>-->
+<!--                    <responsiveStep minWidth="0" columns="1"/>-->
+<!--                    <responsiveStep minWidth="60em" columns="3"/>-->
+<!--                </responsiveSteps>-->
+<!--                <emailField id="emailField" property="email">-->
+<!--                    <prefix>-->
+<!--                        <icon icon="ENVELOPE"/>-->
+<!--                    </prefix>-->
+<!--                </emailField>-->
+<!--                <textField id="phoneField" property="phone">-->
+<!--                    <prefix>-->
+<!--                        <icon icon="PHONE"/>-->
+<!--                    </prefix>-->
+<!--                </textField>-->
+<!--                <textField id="urlField" dataContainer="contactInformationDc" property="url">-->
+<!--                    <prefix>-->
+<!--                        <icon icon="LINK"/>-->
+<!--                    </prefix>-->
+<!--                </textField>-->
+<!--                <textArea id="addressField" dataContainer="contactInformationDc" property="address"-->
+<!--                          height="9.5em" colspan="3">-->
+<!--                    <prefix>-->
+<!--                        <icon icon="MAP_MARKER"/>-->
+<!--                    </prefix>-->
+<!--                </textArea>-->
+<!--            </formLayout>-->
         </details>
 
         <hbox id="detailActions">
