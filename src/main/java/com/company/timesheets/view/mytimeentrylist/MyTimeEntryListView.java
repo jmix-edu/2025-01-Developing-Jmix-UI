@@ -31,23 +31,23 @@ public class MyTimeEntryListView extends StandardView {
     @Autowired
     private DialogWindows dialogWindows;
 
-    @Subscribe("timeEntriesDataGrid.copy")
-    public void onTimeEntriesDataGridCopy(final ActionPerformedEvent event) {
-        TimeEntry selected = timeEntriesDataGrid.getSingleSelectedItem();
-        if (selected == null) {
-            return;
-        }
-
-        TimeEntry copiedEntity = timeEntrySupport.copy(selected);
-
-        DialogWindow<TimeEntryDetailView> viewDialogWindow = dialogWindows.detail(timeEntriesDataGrid)
-                .withViewClass(TimeEntryDetailView.class)
-                .newEntity(copiedEntity)
-                .build();
-        viewDialogWindow.getView().setOwnTimeEntry(true);
-        viewDialogWindow.open();
-
-    }
+//    @Subscribe("timeEntriesDataGrid.copy")
+//    public void onTimeEntriesDataGridCopy(final ActionPerformedEvent event) {
+//        TimeEntry selected = timeEntriesDataGrid.getSingleSelectedItem();
+//        if (selected == null) {
+//            return;
+//        }
+//
+//        TimeEntry copiedEntity = timeEntrySupport.copy(selected);
+//
+//        DialogWindow<TimeEntryDetailView> viewDialogWindow = dialogWindows.detail(timeEntriesDataGrid)
+//                .withViewClass(TimeEntryDetailView.class)
+//                .newEntity(copiedEntity)
+//                .build();
+//        viewDialogWindow.getView().setOwnTimeEntry(true);
+//        viewDialogWindow.open();
+//
+//    }
 
     @Install(to = "timeEntriesDataGrid.create", subject = "queryParametersProvider")
     private QueryParameters timeEntriesDataGridCreateQueryParametersProvider() {
