@@ -1,5 +1,6 @@
 package com.company.timesheets.view.main;
 
+import com.company.timesheets.component.slider.Slider;
 import com.company.timesheets.entity.TimeEntry;
 import com.company.timesheets.event.TimeEntryStatusChangedEvent;
 import com.vaadin.flow.component.html.Span;
@@ -27,6 +28,8 @@ public class MainView extends StandardMainView {
     private DataManager dataManager;
     @ViewComponent
     private JmixListMenu menu;
+    @Autowired
+    private Notifications notifications;
 
     @Subscribe
     public void onInit(final InitEvent event) {
@@ -53,4 +56,8 @@ public class MainView extends StandardMainView {
         menu.getMenuItem("ts_TimeEntry.my").setSuffixComponent(badge);
     }
 
+    @Subscribe("slider")
+    public void onSliderChange(Slider.SlideChangedEvent event) {
+        notifications.show("New value is: " + event.getValue());
+    }
 }
